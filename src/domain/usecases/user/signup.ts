@@ -1,3 +1,5 @@
+import { randomUUID } from 'crypto';
+
 import UserRepository from '../../repositories/UserRepository';
 
 import { Either, right } from '../../errors/either';
@@ -25,6 +27,7 @@ export default class SignUp {
 
   async execute (input: SignUpInput): Promise<Either<Error, SignUpOutput>> {
     await this.userRepository.registerUser({
+      id: randomUUID(),
       name: input.name,
       email: input.email,
       passHash: generatePassHash(input.password)

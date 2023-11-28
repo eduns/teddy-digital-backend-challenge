@@ -31,6 +31,7 @@ export default class SignIn {
       return left(new Error('User not found'));
 
     const token = generateToken({
+      userId: user.id,
       username: user.name,
       password: input.password
     }); 
