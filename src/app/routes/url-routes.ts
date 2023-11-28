@@ -79,7 +79,6 @@ router.post('/url/shorten', async (request: Request, response: Response) => {
       const decodedPayload = verify(token, secretKey);
       ownerId = decodedPayload['userId'];
     } catch (err) {
-      console.error(err);
       return response.status(401).json({
         'error': 'Invalid Authorization Token'
       });
@@ -97,7 +96,7 @@ router.post('/url/shorten', async (request: Request, response: Response) => {
 
   const body = result.statusCode !== 200 ? { 'error': result.body.message } : {
     originUrl: result.body.originUrl,
-    shortenUrl: `http://localhost:${port}/url/redirect/${result.body.urlId}`
+    shortenUrl: `http://localhost:${port}/url/stats/${result.body.urlId}`
   };
 
   return response.status(result.statusCode).json(body);
