@@ -1,0 +1,14 @@
+export type ControllerResponse = {
+  statusCode: number;
+  body: any;
+};
+
+export const ok = (data: any): ControllerResponse => ({
+  statusCode: 200,
+  body: data
+});
+
+export const badRequest = (error: Error): ControllerResponse => ({
+  statusCode: 400,
+  body: error
+});
