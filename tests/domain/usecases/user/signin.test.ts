@@ -2,6 +2,8 @@ import { SignInInput, SignInOutput } from '../../../../src/domain/usecases/user/
 
 import { makeSignInUseCase } from '../../../utils';
 
+process.env.SECRET_KEY = 'test';
+
 describe('Sign In UseCase', () => {
   it('should be able to sign in a existing user', async () => {
     const input: SignInInput = {

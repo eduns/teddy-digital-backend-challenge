@@ -1,6 +1,8 @@
 import ShortenURL from '../src/domain/usecases/url/shorten-url';
-import UpdateURLClicks from '../src/domain/usecases/url/update-url-clicks';
 import DeactivateURL from '../src/domain/usecases/url/deactivate-url';
+import GetOriginURL from '../src/domain/usecases/url/get-origin-url';
+import ListShortenURLs from '../src/domain/usecases/url/list-shorten-urls';
+import GetURLStats from '../src/domain/usecases/url/get-url-stats';
 import SignUp from '../src/domain/usecases/user/signup';
 import SignIn from '../src/domain/usecases/user/signin';
 
@@ -11,12 +13,20 @@ const makeShortenUrlUseCase = () => {
   return new ShortenURL(new InMemoryURLRepository());
 };
 
-const makeUpdateUrlClicksUseCase = () => {
-  return new UpdateURLClicks(new InMemoryURLRepository());
-};
-
 const makeDeactivateURLUseCase = () => {
   return new DeactivateURL(new InMemoryURLRepository());
+};
+
+const makeGetOriginURLUseCase = () => {
+  return new GetOriginURL(new InMemoryURLRepository());
+};
+
+const makeListShortenURLsUseCase = () => {
+  return new ListShortenURLs(new InMemoryURLRepository());
+};
+
+const makeGetURLStatsUseCase = () => {
+  return new GetURLStats(new InMemoryURLRepository());
 };
 
 const makeSignUpUseCase = () => {
@@ -29,8 +39,10 @@ const makeSignInUseCase = () => {
 
 export {
   makeShortenUrlUseCase,
-  makeUpdateUrlClicksUseCase,
   makeDeactivateURLUseCase,
+  makeGetOriginURLUseCase,
+  makeListShortenURLsUseCase,
+  makeGetURLStatsUseCase,
   makeSignUpUseCase,
   makeSignInUseCase
 };

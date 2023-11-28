@@ -8,10 +8,6 @@ export default class InMemoryUserRepository implements UserRepository {
     new User('3', 'foobar1', 'foobar1@mail.com', 'bb07d9e8302b1906a04ad1ec7d8fa6caccddfba263bd45c0a810f069de31c47d')
   ];
 
-  async findById(id: string): Promise<User | null> {
-    return this.users.find(user => user.id === id) || null;
-  }
-
   async findByCredentials(email: string, passHash: string): Promise<User | null> {
     return this.users.find(user => user.email === email && user.passHash === passHash) || null;
   }

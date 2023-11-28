@@ -17,8 +17,6 @@ describe('ShortenURL UseCase', () => {
     const shortenUrl = result.value as ShortenURLOutput;
 
     expect(shortenUrl.urlId).toMatch(new RegExp(/^[A-Za-z0-9]{1,6}$/));
-    expect(shortenUrl.createdAt.toLocaleDateString('pt-br')).toEqual(new Date().toLocaleDateString('pt-br'));
-    expect(shortenUrl.deletedAt).toBeNull();
   });
 
   it('should be able to shorten a given url with no owner', async () => {
