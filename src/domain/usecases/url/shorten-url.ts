@@ -12,9 +12,6 @@ export type ShortenURLInput = {
 export type ShortenURLOutput = {
   urlId: string;
   originUrl: string;
-  createdAt: Date;
-  deletedAt: Date | null;
-  ownerId: string | null;
 }
 
 /**
@@ -34,28 +31,30 @@ export default class ShortenURL {
     if (shortenURL) {
       result = {
         urlId: shortenURL.urlId,
-        originUrl: shortenURL.originUrl,
-        createdAt: shortenURL.createdAt,
-        deletedAt: shortenURL.deletedAt,
-        ownerId: shortenURL.ownerId
+        originUrl: shortenURL.originUrl
       };
 
       return right(result);
     }
 
     const urlId = generateURLId();
-    const ownerId = input.ownerId as string;
-    
-    shortenURL = new ShortURL(urlId, input.originUrl, ownerId);
+    const originUrl = input.originUrl;
+
+    shortenURL = ShortURL.create({
+      urlId,
+      originUrl,
+      ownerId: input.ownerId,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      deletedAt: null,
+      clicks: 0
+    });
 
     await this.urlRepository.save(shortenURL);
       
     result = {
       urlId,
-      originUrl: shortenURL.originUrl,
-      createdAt: shortenURL.createdAt,
-      deletedAt: shortenURL.deletedAt,
-      ownerId
+      originUrl,
     };
 
     return right(result);

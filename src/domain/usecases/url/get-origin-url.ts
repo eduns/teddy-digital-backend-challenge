@@ -2,38 +2,35 @@ import URLRepository from '../../repositories/URLRepository';
 
 import { Either, left, right } from '../../errors/either';
 
-export type UpdateURLClicksInput = {
+export type GetOriginURLInput = {
   urlId: string;
 };
 
-export type UpdateURLClicksOutput = {
-  urlId: string;
-  clicks: number;
-}
+export type GetOriginURLOutput = {
+  originUrl: string;
+};
 
 /**
- * Given a URL id, update the number of clicks
+ * Given a URL id, return its origin url
  */
-export default class UpdateURLClicks {
+export default class GetOriginURL {
   constructor(
     private readonly urlRepository: URLRepository
   ) {}
 
-  async execute (input: UpdateURLClicksInput): Promise<Either<Error, UpdateURLClicksOutput>> {
+  async execute (input: GetOriginURLInput): Promise<Either<Error, GetOriginURLOutput>> {
     const shortenURL = await this.urlRepository.findByURLId(input.urlId);
 
-    if (!shortenURL) {
+    if (!shortenURL)
       return left(new Error('URL not found'));
-    }
+    
+    const result: GetOriginURLOutput = {
+      originUrl: shortenURL.originUrl
+    };
 
     shortenURL.updateClicks();
 
     await this.urlRepository.updateShortenURL(shortenURL);
-
-    const result: UpdateURLClicksOutput = {
-      urlId: shortenURL.urlId,
-      clicks: shortenURL.clicks
-    };
 
     return right(result);
   }
