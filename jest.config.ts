@@ -185,7 +185,7 @@ const config: Config = {
             tsx: false,
             decorators: true
           },
-          target: 'es2022',
+          target: 'es2021',
           keepClassNames: true,
           transform: {
             legacyDecorator: true,

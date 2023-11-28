@@ -1,0 +1,8 @@
+tests
+node_modules
+dist
+.gitignore
+.git
+*.md
+jest.config.json
+.eslint.json

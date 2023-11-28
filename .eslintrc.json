@@ -18,7 +18,8 @@
     "rules": {
         "semi": ["error", "always", { "omitLastInOneLineBlock": false }],
         "quotes": ["error", "single"],
-        "no-extra-semi": ["error"]
+        "no-extra-semi": ["error"],
+        "@typescript-eslint/no-explicit-any": "off"
     },
     "root": true
 }
